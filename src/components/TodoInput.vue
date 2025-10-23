@@ -1,23 +1,28 @@
 <template>
     <div class="input-group">
-        <input v-model="newTodo" @keyup.enter="handleAdd" placeholder="輸入待辦事項，按 Enter 新增" />
+        <input v-model="newTodo" @keyup.enter="handleAdd" placeholder="輸入待辦事項，按 Enter 新增" type="text"/>
         <button @click="handleAdd" :disabled="!newTodo.trim()">
             新增
         </button>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const emit = defineEmits(['add'])
+const emit = defineEmits<{
+  (e: 'add', text: string): void
+}>()
+
+
 const newTodo = ref('')
 
-const handleAdd = () => {
-    if (newTodo.value.trim()) {
-        emit('add', newTodo.value)
-        newTodo.value = ''
-    }
+const handleAdd = (): void => {
+  const trimmed = newTodo.value.trim()
+  if (trimmed) {
+    emit('add', trimmed)
+    newTodo.value = ''
+  }
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
   <div class="todo-page">
+    
+    <h1>🌟 Aqua 的真實 Vue 3 待辦清單</h1>
     <TodoApp />
-    <h1>📝 我的待辦清單</h1>
   </div>
 </template>
 
