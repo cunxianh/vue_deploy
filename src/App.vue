@@ -1,20 +1,14 @@
 <template>
   <div class="todo-app">
-    
+    <h1>🌟 Aqua 的真實 Vue 3 待辦清單</h1>
     <nav class="navbar">
       <router-link to="/" class="nav-link">🏠 首頁</router-link>
       <router-link to="/todo" class="nav-link">📋 待辦</router-link>
       <router-link to="/about" class="nav-link">ℹ️ 關於</router-link>
     </nav>
-    <TodoFilters 
-      :current-filter="store.currentFilter" 
-      @filter-change="store.setFilter" 
-    />
-    <TodoList 
-      :todos="store.filteredTodos" 
-      @toggle="store.toggleTodo"
-      @remove="store.removeTodo"
-    />
+    <TodoInput @add="store.addTodo" />
+    <TodoFilters :current-filter="store.currentFilter" @filter-change="store.setFilter" />
+    <TodoList :todos="store.filteredTodos" @toggle="store.toggleTodo" @remove="store.removeTodo" />
     <div class="stats">
       總計：{{ store.todos.length }} | 已完成：{{ store.completedCount }}
     </div>
@@ -22,11 +16,11 @@
 </template>
 
 <script setup>
-import { useTodoStore } from '@/stores/todo'
+import { useTodoStore } from './stores/todo'
 import { onMounted } from 'vue'
-import TodoInput from '@/components/TodoInput.vue'
-import TodoFilters from '@/components/TodoFilters.vue'
-import TodoList from '@/components/TodoList.vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoFilters from './components/TodoFilters.vue'
+import TodoList from './components/TodoList.vue'
 
 
 const store = useTodoStore()

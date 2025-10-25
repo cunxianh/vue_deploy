@@ -1,6 +1,6 @@
 <template>
     <div class="input-group">
-        <input v-model="newTodo" @keyup.enter="handleAdd" placeholder="輸入待辦事項，按 Enter 新增" type="text"/>
+        <input v-model="newTodo" @keyup.enter="handleAdd" placeholder="輸入待辦事項，按 Enter 新增" type="text" />
         <button @click="handleAdd" :disabled="!newTodo.trim()">
             新增
         </button>
@@ -11,19 +11,25 @@
 import { ref } from 'vue'
 
 const emit = defineEmits<{
-  (e: 'add', text: string): void
+    (e: 'add', text: string): void
 }>()
 
 
 const newTodo = ref('')
 
-const handleAdd = (): void => {
-  const trimmed = newTodo.value.trim()
-  if (trimmed) {
-    emit('add', trimmed)
-    newTodo.value = ''
+const handleAdd = async (): Promise<void> => {
+  const trimmed = newTodo.value.trim();
+  if (!trimmed) return;
+
+  try {
+    // 假設 emit 會觸發一個 async addTodo
+    await emit('add', trimmed); 
+    newTodo.value = '';
+  } catch (error: any) {
+    console.error('Add todo failed:', error);
+    alert('新增失敗，請確認輸入內容'); // 提醒使用者
   }
-}
+};
 </script>
 
 <style scoped>
