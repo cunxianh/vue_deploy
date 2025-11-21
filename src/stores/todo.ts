@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { TodoItem } from '../shared/types'  // 注意路徑
 
-const API_BASE = 'https://vuebackenddeploy-production.up.railway.app/api'  // ✅ 修正埠號
+const API_BASE = import.meta.env.VITE_token  // ✅ 修正埠號
 
 
 export const useTodoStore = defineStore('todo', () => {

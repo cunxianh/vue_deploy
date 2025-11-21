@@ -1,38 +1,80 @@
-# aqua-todo-app
+# todo-app
 
-This template should help get you started developing with Vue 3 in Vite.
+A small Vue 3 + Vite todo application template used for learning and experimenting. It uses Pinia for state management, Vue Router for routing, and Axios for HTTP requests. The project is configured with TypeScript support (type checking), though the source contains both JS and TS composables for demonstration.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3 + Vite starter
+- Pinia store for todos
+- Simple API composable to demonstrate fetching/persisting todos
+- Local development proxy to backend under `/api`
 
-## Recommended Browser Setup
+## Tech stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Vue 3
+- Vite
+- Pinia
+- Vue Router
+- Axios
+- TypeScript (type checking via `vue-tsc` / `tsc`)
 
-## Customize configuration
+## Prerequisites
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Node.js (recommended: 20.x or compatible per `package.json` engines)
+- npm (or another package manager)
 
-## Project Setup
+## Setup (install dependencies)
 
-```sh
+Open a terminal in the project directory and run:
+
+```powershell
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## Environment
 
-```sh
+This project reads a Vite env variable defined in `.env`:
+
+- `VITE_token` — demo token used by the example API client. Do not use the shipped value in production.
+
+Copy or update the `.env` file as needed. Example (already present):
+
+```text
+VITE_token=aqua-secret-key-please-change-in-production
+```
+
+## Useful scripts
+
+- `npm run dev` — start Vite dev server with HMR
+- `npm run build` — build production assets
+- `npm run preview` — locally preview production build
+- `npm run type-check` — run TypeScript `tsc` type-checking (no emit)
+
+Run the dev server:
+
+```powershell
 npm run dev
 ```
 
-### Compile and Minify for Production
+Open http://localhost:5173 (or the port printed by Vite) in your browser.
 
-```sh
-npm run build
+## Type checking and static typing
+
+The repo includes TypeScript config and `vue-tsc` in devDependencies. To run a type-check pass:
+
+```powershell
+npm run type-check
 ```
+
+Note: the project mixes JS and TS files intentionally for learning. If you convert everything to TypeScript, update `tsconfig.json` includes as needed.
+
+## Contributing
+
+Feel free to submit issues and enhancement requests.
+
+## License
+
+This project for educational purposes.
+
+
+
