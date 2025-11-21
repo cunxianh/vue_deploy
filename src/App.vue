@@ -1,6 +1,6 @@
 <template>
   <div class="todo-app">
-    <h1>🌟 Aqua 的真實 Vue 3 待辦清單</h1>
+    <h1>🌟 Vue 3 待辦清單</h1>
     <nav class="navbar">
       <router-link to="/" class="nav-link">🏠 首頁</router-link>
       <router-link to="/todo" class="nav-link">📋 待辦</router-link>
