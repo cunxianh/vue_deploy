@@ -31,18 +31,6 @@ Open a terminal in the project directory and run:
 npm install
 ```
 
-## Environment
-
-This project reads a Vite env variable defined in `.env`:
-
-- `VITE_token` — demo token used by the example API client. Do not use the shipped value in production.
-
-Copy or update the `.env` file as needed. Example (already present):
-
-```text
-VITE_token=aqua-secret-key-please-change-in-production
-```
-
 ## Useful scripts
 
 - `npm run dev` — start Vite dev server with HMR
