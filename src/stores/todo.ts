@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { TodoItem } from '../shared/types'  // 注意路徑
 
-const API_BASE = import.meta.env.VITE_token  // ✅ 修正埠號
+const API_BASE = import.meta.env.API_BASE  // ✅ 修正埠號
 
 
 export const useTodoStore = defineStore('todo', () => {
@@ -33,7 +33,7 @@ export const useTodoStore = defineStore('todo', () => {
   const loadTodos = async () => {
     loading.value = true
     try {
-      const res = await fetch(`${API_BASE}/todos`)
+      const res = await fetch(`${API_BASE}/api/todos`)
       if (!res.ok) throw new Error('Failed to fetch')
       todos.value = await res.json()
     } catch (error) {
@@ -45,7 +45,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const addTodo = async (text: string) => {
     try {
-      const res = await fetch(`${API_BASE}/todos`, {
+      const res = await fetch(`${API_BASE}/api/todos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
@@ -59,7 +59,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const toggleTodo = async (id: number) => {
     try {
-      await fetch(`${API_BASE}/todos/${id}/toggle`, { method: 'PATCH' })
+      await fetch(`${API_BASE}/api/todos/${id}/toggle`, { method: 'PATCH' })
       await loadTodos()  // 重新載入最新資料
     } catch (error) {
       console.error('切換失敗:', error)
@@ -68,7 +68,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const removeTodo = async (id: number) => {
     try {
-      await fetch(`${API_BASE}/todos/${id}`, { method: 'DELETE' })
+      await fetch(`${API_BASE}/api/todos/${id}`, { method: 'DELETE' })
       todos.value = todos.value.filter(t => t.id !== id)
     } catch (error) {
       console.error('刪除失敗:', error)
