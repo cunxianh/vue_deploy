@@ -5,7 +5,6 @@ import type { TodoItem } from '../shared/types'  // 注意路徑
 
 const API_BASE = import.meta.env.VITE_API_BASE  // ✅ 修正埠號
 
-
 export const useTodoStore = defineStore('todo', () => {
   const todos = ref<TodoItem[]>([])
   const loading = ref(false)
@@ -66,7 +65,7 @@ export const useTodoStore = defineStore('todo', () => {
     }
   }
 
-  const removeTodo = async (id: number) => {
+  const removeTodo = async (id: String) => {
     try {
       await fetch(`${API_BASE}/api/todos/${id}`, { method: 'DELETE' })
       todos.value = todos.value.filter(t => t.id !== id)
