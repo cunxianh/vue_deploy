@@ -2,8 +2,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { TodoItem } from '../shared/types'  // 注意路徑
-
-const API_BASE = import.meta.env.VITE_API_BASE  // ✅ 修正埠號
+import API from '@/api/API'
 
 export const useTodoStore = defineStore('todo', () => {
   const todos = ref<TodoItem[]>([])
@@ -32,9 +31,9 @@ export const useTodoStore = defineStore('todo', () => {
   const loadTodos = async () => {
     loading.value = true
     try {
-      const res = await fetch(`${API_BASE}/api/todos`)
-      if (!res.ok) throw new Error('Failed to fetch')
-      todos.value = await res.json()
+      const res = await API.get(`api/todos`)
+      
+      todos.value = await res.data
     } catch (error) {
       console.error('載入待辦失敗:', error)
     } finally {
@@ -44,12 +43,9 @@ export const useTodoStore = defineStore('todo', () => {
 
   const addTodo = async (text: string) => {
     try {
-      const res = await fetch(`${API_BASE}/api/todos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
-      })
-      const newTodo = await res.json()
+      const res = await API.post(`api/todos`, {text})
+      const newTodo = await res.data
+
       todos.value.push(newTodo)
     } catch (error) {
       console.error('新增失敗:', error)
@@ -58,7 +54,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const toggleTodo = async (id: number) => {
     try {
-      await fetch(`${API_BASE}/api/todos/${id}/toggle`, { method: 'PATCH' })
+      await API.patch(`api/todos/${id}/toggle`)
       await loadTodos()  // 重新載入最新資料
     } catch (error) {
       console.error('切換失敗:', error)
@@ -67,7 +63,7 @@ export const useTodoStore = defineStore('todo', () => {
 
   const removeTodo = async (id: String) => {
     try {
-      await fetch(`${API_BASE}/api/todos/${id}`, { method: 'DELETE' })
+      await API.delete(`api/todos/${id}`)
       todos.value = todos.value.filter(t => t.id !== id)
     } catch (error) {
       console.error('刪除失敗:', error)

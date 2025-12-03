@@ -1,10 +1,8 @@
 <template>
   <div class="todo-app">
-    <h1>🌟 Vue 3 待辦清單</h1>
+    <h1 class="text-2xl font-bold">🌟 Vue 3 待辦清單</h1>
     <nav class="navbar">
       <router-link to="/" class="nav-link">🏠 首頁</router-link>
-      <router-link to="/todo" class="nav-link">📋 待辦</router-link>
-      <router-link to="/about" class="nav-link">ℹ️ 關於</router-link>
     </nav>
     <TodoInput @add="store.addTodo" />
     <TodoFilters :current-filter="store.currentFilter" @filter-change="store.setFilter" />
